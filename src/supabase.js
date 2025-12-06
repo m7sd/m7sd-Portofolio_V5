@@ -1,16 +1,19 @@
 // src/supabase.js
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Local dev env variables
+const envUrl = import.meta.env.VITE_SUPABASE_URL;
+const envKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// This helps show a clear error in the console if env vars are missing
+// Fallback values for GitHub Pages
+const fallbackUrl = "https://bouauugawmbcvzdmvwpr.supabase.co";
+const fallbackKey = "sb_publishable_MtVerupDWvbibTPhzUgkTg_DaFwSQSn";
+
+const supabaseUrl = envUrl || fallbackUrl;
+const supabaseAnonKey = envKey || fallbackKey;
+
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Supabase env vars:', { supabaseUrl, supabaseAnonKey });
-  throw new Error(
-    'Missing Supabase environment variables. ' +
-      'Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.'
-  );
+  console.error("Supabase config missing");
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
