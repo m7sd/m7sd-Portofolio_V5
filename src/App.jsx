@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./index.css";
 
 import Home from "./Pages/Home";
@@ -70,21 +70,19 @@ function App() {
   const [showWelcome, setShowWelcome] = useState(true);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <LandingPage
-              showWelcome={showWelcome}
-              setShowWelcome={setShowWelcome}
-            />
-          }
-        />
-        <Route path="/project/:id" element={<ProjectPageLayout />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <LandingPage
+            showWelcome={showWelcome}
+            setShowWelcome={setShowWelcome}
+          />
+        }
+      />
+      <Route path="/project/:id" element={<ProjectPageLayout />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
